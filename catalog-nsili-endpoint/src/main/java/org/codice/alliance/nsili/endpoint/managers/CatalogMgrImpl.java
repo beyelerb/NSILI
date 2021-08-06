@@ -39,6 +39,7 @@ import org.codice.alliance.nsili.common.UCO.InvalidInputParameter;
 import org.codice.alliance.nsili.common.UCO.NameValue;
 import org.codice.alliance.nsili.common.UCO.ProcessingFault;
 import org.codice.alliance.nsili.common.UCO.SystemFault;
+import org.codice.alliance.nsili.endpoint.AuditLogger;
 import org.codice.alliance.nsili.endpoint.LibraryImpl;
 import org.codice.alliance.nsili.endpoint.NsiliEndpoint;
 import org.codice.alliance.nsili.endpoint.requests.HitCountRequestImpl;
@@ -259,7 +260,7 @@ public class CatalogMgrImpl extends CatalogMgrPOA {
 
     try {
       QueryCountCallable queryCallable = new QueryCountCallable(catalogQueryRequest);
-      resultCount = NsiliEndpoint.getGuestSubject().execute(queryCallable);
+      resultCount = NsiliEndpoint.getGuestSubject(new AuditLogger()).execute(queryCallable);
     } catch (Exception e) {
       LOGGER.debug("Unable to query catalog", e);
     }

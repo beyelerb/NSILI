@@ -18,6 +18,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 import ddf.catalog.CatalogFramework;
 import ddf.catalog.filter.FilterBuilder;
 import ddf.security.Subject;
+import ddf.security.audit.SecurityLogger;
 import ddf.security.service.SecurityManager;
 import ddf.security.service.SecurityServiceException;
 import java.net.InetAddress;
@@ -33,7 +34,7 @@ import org.codice.alliance.nsili.common.ResultDAGConverter;
 import org.codice.alliance.nsili.endpoint.managers.EmailConfiguration;
 import org.codice.alliance.nsili.orb.api.CorbaOrb;
 import org.codice.alliance.nsili.orb.api.CorbaServiceListener;
-import org.codice.ddf.security.handler.api.GuestAuthenticationToken;
+import org.codice.ddf.security.handler.GuestAuthenticationToken;
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POA;
@@ -102,6 +103,8 @@ public class NsiliEndpoint implements CorbaServiceListener, QuerySources {
   private static Subject guestSubject = null;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(NsiliEndpoint.class);
+
+  private static final AuditLogger securityLogger = new AuditLogger();
 
   public NsiliEndpoint() {
     LOGGER.debug("NSILI Endpoint constructed");
@@ -419,7 +422,8 @@ public class NsiliEndpoint implements CorbaServiceListener, QuerySources {
     LOGGER.debug("Initialized NSILI Endpoint with IOR: {}", iorString);
   }
 
-  public static synchronized Subject getGuestSubject() throws SecurityServiceException {
+  public static synchronized Subject getGuestSubject(SecurityLogger securityLogger)
+      throws SecurityServiceException {
     if (guestSubject == null) {
 
       String ip = DEFAULT_IP_ADDRESS;
@@ -431,7 +435,8 @@ public class NsiliEndpoint implements CorbaServiceListener, QuerySources {
       }
 
       String guestTokenId = ip;
-      GuestAuthenticationToken guestToken = new GuestAuthenticationToken(guestTokenId);
+      GuestAuthenticationToken guestToken =
+          new GuestAuthenticationToken(guestTokenId, securityLogger);
       guestSubject = securityManager.getSubject(guestToken);
     }
 

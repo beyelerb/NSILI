@@ -53,6 +53,7 @@ import org.codice.alliance.nsili.common.UCO.Status;
 import org.codice.alliance.nsili.common.UCO.StringDAGListHolder;
 import org.codice.alliance.nsili.common.UCO.SystemFault;
 import org.codice.alliance.nsili.common.datamodel.NsiliDataModel;
+import org.codice.alliance.nsili.endpoint.AuditLogger;
 import org.codice.alliance.nsili.endpoint.LibraryImpl;
 import org.codice.alliance.nsili.endpoint.NsiliEndpoint;
 import org.omg.CORBA.NO_IMPLEMENT;
@@ -304,7 +305,8 @@ public class SubmitQueryRequestImpl extends SubmitQueryRequestPOA {
     try {
       QueryResultsCallable queryCallable = new QueryResultsCallable(catalogQueryRequest);
       List<Result> queryResults =
-          LibraryImpl.getLatestResults(NsiliEndpoint.getGuestSubject().execute(queryCallable));
+          LibraryImpl.getLatestResults(
+              NsiliEndpoint.getGuestSubject(new AuditLogger()).execute(queryCallable));
       results.addAll(queryResults);
 
     } catch (ExecutionException | SecurityServiceException e) {

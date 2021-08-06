@@ -51,6 +51,7 @@ import org.codice.alliance.nsili.common.UCO.Status;
 import org.codice.alliance.nsili.common.UCO.StringDAGHolder;
 import org.codice.alliance.nsili.common.UCO.SystemFault;
 import org.codice.alliance.nsili.common.datamodel.NsiliDataModel;
+import org.codice.alliance.nsili.endpoint.AuditLogger;
 import org.codice.alliance.nsili.endpoint.NsiliEndpoint;
 import org.omg.CORBA.NO_IMPLEMENT;
 import org.opengis.filter.Filter;
@@ -198,7 +199,8 @@ public class GetParametersRequestImpl extends GetParametersRequestPOA {
     Result result = null;
     try {
       QueryResultsCallable queryCallable = new QueryResultsCallable(queryRequest);
-      List<Result> results = NsiliEndpoint.getGuestSubject().execute(queryCallable);
+      List<Result> results =
+          NsiliEndpoint.getGuestSubject(new AuditLogger()).execute(queryCallable);
       if (results != null && !results.isEmpty()) {
         result = results.iterator().next();
       }

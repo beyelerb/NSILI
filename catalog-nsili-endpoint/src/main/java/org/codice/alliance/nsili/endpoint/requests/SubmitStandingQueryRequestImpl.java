@@ -74,6 +74,7 @@ import org.codice.alliance.nsili.common.UCO.StringDAGListHolder;
 import org.codice.alliance.nsili.common.UCO.SystemFault;
 import org.codice.alliance.nsili.common.UCO.Time;
 import org.codice.alliance.nsili.common.datamodel.NsiliDataModel;
+import org.codice.alliance.nsili.endpoint.AuditLogger;
 import org.codice.alliance.nsili.endpoint.LibraryImpl;
 import org.codice.alliance.nsili.endpoint.NsiliEndpoint;
 import org.codice.alliance.nsili.endpoint.managers.RequestManagerImpl;
@@ -574,7 +575,8 @@ public class SubmitStandingQueryRequestImpl extends SubmitStandingQueryRequestPO
 
         try {
           LOGGER.debug("Executing query...");
-          QueryResponse queryResponse = NsiliEndpoint.getGuestSubject().execute(queryCallable);
+          QueryResponse queryResponse =
+              NsiliEndpoint.getGuestSubject(new AuditLogger()).execute(queryCallable);
           int numHits = (int) queryResponse.getHits();
           LOGGER.trace("Hits received: {}", numHits);
           List<Result> results = queryResponse.getResults();

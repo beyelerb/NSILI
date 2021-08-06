@@ -47,7 +47,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.commons.lang.StringUtils;
-import org.codice.alliance.catalog.core.api.impl.types.IsrAttributes;
 import org.codice.alliance.catalog.core.api.types.Isr;
 import org.codice.alliance.catalog.core.api.types.Security;
 import org.codice.alliance.nsili.common.CorbaUtils;
@@ -329,31 +328,30 @@ public class DAGConverter {
         addDescription(metacard, getString(node.value));
         break;
       case NsiliConstants.IDENTIFIER_MISSION:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.MISSION_ID, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.MISSION_ID, getString(node.value)));
         break;
       case NsiliConstants.IDENTIFIER_UUID:
         metacard.setId(getString(node.value));
         break;
       case NsiliConstants.IDENTIFIER_JC3IEDM:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.JC3IEDM_ID, getInteger(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.JC3IEDM_ID, getInteger(node.value)));
         break;
       case NsiliConstants.LANGUAGE:
         metacard.setAttribute(new AttributeImpl(CoreAttributes.LANGUAGE, getString(node.value)));
         break;
       case NsiliConstants.SOURCE:
-        metacard.setAttribute(
-            new AttributeImpl(IsrAttributes.PLATFORM_NAME, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.PLATFORM_NAME, getString(node.value)));
         break;
       case NsiliConstants.SUBJECT_CATEGORY_TARGET:
         String categoryCodes = getString(node.value);
         if (categoryCodes != null) {
           List<Serializable> codes =
               Stream.of(categoryCodes.split(",")).map(String::trim).collect(Collectors.toList());
-          metacard.setAttribute(new AttributeImpl(IsrAttributes.NATO_REPORTING_CODE, codes));
+          metacard.setAttribute(new AttributeImpl(Isr.NATO_REPORTING_CODE, codes));
         }
         break;
       case NsiliConstants.TARGET_NUMBER:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.TARGET_ID, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.TARGET_ID, getString(node.value)));
         break;
       case NsiliConstants.TYPE:
         metacard.setAttribute(
@@ -400,18 +398,15 @@ public class DAGConverter {
         addDescription(metacard, getString(node.value));
         break;
       case NsiliConstants.LEVEL:
-        metacard.setAttribute(
-            new AttributeImpl(IsrAttributes.EXPLOITATION_LEVEL, getShort(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.EXPLOITATION_LEVEL, getShort(node.value)));
         break;
       case NsiliConstants.AUTO_GENERATED:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.EXPLOTATION_AUTO_GENERATED, node.value.extract_boolean()));
+            new AttributeImpl(Isr.EXPLOTATION_AUTO_GENERATED, node.value.extract_boolean()));
         break;
       case NsiliConstants.SUBJ_QUALITY_CODE:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.EXPLOITATION_SUBJECTIVE_QUALITY_CODE, getString(node.value)));
+            new AttributeImpl(Isr.EXPLOITATION_SUBJECTIVE_QUALITY_CODE, getString(node.value)));
         break;
       default:
         break;
@@ -455,12 +450,10 @@ public class DAGConverter {
     switch (node.attribute_name) {
       case NsiliConstants.IDENTIFIER_JOB:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.MOVING_TARGET_INDICATOR_JOB_ID, node.value.extract_double()));
+            new AttributeImpl(Isr.MOVING_TARGET_INDICATOR_JOB_ID, node.value.extract_double()));
         break;
       case NsiliConstants.NUMBER_OF_TARGET_REPORTS:
-        metacard.setAttribute(
-            new AttributeImpl(IsrAttributes.TARGET_REPORT_COUNT, getInteger(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.TARGET_REPORT_COUNT, getInteger(node.value)));
         break;
       default:
         break;
@@ -471,25 +464,24 @@ public class DAGConverter {
     // If any Imagery attribute is added, set the card type
     switch (node.attribute_name) {
       case NsiliConstants.CATEGORY:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.CATEGORY, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.CATEGORY, getString(node.value)));
         break;
       case NsiliConstants.CLOUD_COVER_PCT:
-        metacard.setAttribute(
-            new AttributeImpl(IsrAttributes.CLOUD_COVER, getDoubleFromShort(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.CLOUD_COVER, getDoubleFromShort(node.value)));
         break;
       case NsiliConstants.COMMENTS:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.COMMENTS, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.COMMENTS, getString(node.value)));
         break;
       case NsiliConstants.DECOMPRESSION_TECHNIQUE:
         metacard.setAttribute(new AttributeImpl(Media.COMPRESSION, getString(node.value)));
         break;
       case NsiliConstants.IDENTIFIER:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.IMAGE_ID, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.IMAGE_ID, getString(node.value)));
         break;
       case NsiliConstants.NIIRS:
         metacard.setAttribute(
             new AttributeImpl(
-                IsrAttributes.NATIONAL_IMAGERY_INTERPRETABILITY_RATING_SCALE,
+                Isr.NATIONAL_IMAGERY_INTERPRETABILITY_RATING_SCALE,
                 getDoubleFromShort(node.value)));
         break;
       case NsiliConstants.NUMBER_OF_BANDS:
@@ -512,15 +504,13 @@ public class DAGConverter {
   private void addNsilReportAttribute(MetacardImpl metacard, Node node) {
     switch (node.attribute_name) {
       case NsiliConstants.ORIGINATORS_REQ_SERIAL_NUM:
-        metacard.setAttribute(
-            new AttributeImpl(IsrAttributes.REPORT_SERIAL_NUMBER, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.REPORT_SERIAL_NUMBER, getString(node.value)));
         break;
       case NsiliConstants.PRIORITY:
-        metacard.setAttribute(
-            new AttributeImpl(IsrAttributes.REPORT_PRIORITY, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.REPORT_PRIORITY, getString(node.value)));
         break;
       case NsiliConstants.TYPE:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.REPORT_TYPE, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.REPORT_TYPE, getString(node.value)));
         break;
       default:
         break;
@@ -531,27 +521,23 @@ public class DAGConverter {
     switch (node.attribute_name) {
       case NsiliConstants.FOR_ACTION:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.REQUEST_FOR_INFORMATION_FOR_ACTION, getString(node.value)));
+            new AttributeImpl(Isr.REQUEST_FOR_INFORMATION_FOR_ACTION, getString(node.value)));
         break;
       case NsiliConstants.FOR_INFORMATION:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.REQUEST_FOR_INFORMATION_FOR_INFORMATION, getString(node.value)));
+            new AttributeImpl(Isr.REQUEST_FOR_INFORMATION_FOR_INFORMATION, getString(node.value)));
         break;
       case NsiliConstants.SERIAL_NUMBER:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.REQUEST_FOR_INFORMATION_SERIAL_NUMBER, getString(node.value)));
+            new AttributeImpl(Isr.REQUEST_FOR_INFORMATION_SERIAL_NUMBER, getString(node.value)));
         break;
       case NsiliConstants.STATUS:
         metacard.setAttribute(
-            new AttributeImpl(IsrAttributes.REQUEST_FOR_INFORMATION_STATUS, getString(node.value)));
+            new AttributeImpl(Isr.REQUEST_FOR_INFORMATION_STATUS, getString(node.value)));
         break;
       case NsiliConstants.WORKFLOW_STATUS:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.REQUEST_FOR_INFORMATION_WORKFLOW_STATUS, getString(node.value)));
+            new AttributeImpl(Isr.REQUEST_FOR_INFORMATION_WORKFLOW_STATUS, getString(node.value)));
         break;
       default:
         break;
@@ -621,11 +607,10 @@ public class DAGConverter {
   private void addNsilTaskAttribute(MetacardImpl metacard, Node node) {
     switch (node.attribute_name) {
       case NsiliConstants.COMMENTS:
-        metacard.setAttribute(
-            new AttributeImpl(IsrAttributes.TASK_COMMENTS, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.TASK_COMMENTS, getString(node.value)));
         break;
       case NsiliConstants.STATUS:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.TASK_STATUS, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.TASK_STATUS, getString(node.value)));
         break;
       default:
         break;
@@ -636,21 +621,19 @@ public class DAGConverter {
     switch (node.attribute_name) {
       case NsiliConstants.ACTIVITY:
         metacard.setAttribute(
-            new AttributeImpl(IsrAttributes.TACTICAL_DATA_LINK_ACTIVITY, getShort(node.value)));
+            new AttributeImpl(Isr.TACTICAL_DATA_LINK_ACTIVITY, getShort(node.value)));
         break;
 
       case NsiliConstants.MESSAGE_NUM:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.TACTICAL_DATA_LINK_MESSAGE_NUMBER, getString(node.value)));
+            new AttributeImpl(Isr.TACTICAL_DATA_LINK_MESSAGE_NUMBER, getString(node.value)));
         break;
       case NsiliConstants.PLATFORM:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.PLATFORM_ID, getShort(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.PLATFORM_ID, getShort(node.value)));
         break;
       case NsiliConstants.TRACK_NUM:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.TACTICAL_DATA_LINK_TRACK_NUMBER, getString(node.value)));
+            new AttributeImpl(Isr.TACTICAL_DATA_LINK_TRACK_NUMBER, getString(node.value)));
         break;
       default:
         break;
@@ -664,7 +647,7 @@ public class DAGConverter {
             new AttributeImpl(Media.BITS_PER_SECOND, node.value.extract_double()));
         break;
       case NsiliConstants.CATEGORY:
-        metacard.setAttribute(new AttributeImpl(IsrAttributes.CATEGORY, getString(node.value)));
+        metacard.setAttribute(new AttributeImpl(Isr.CATEGORY, getString(node.value)));
         break;
       case NsiliConstants.ENCODING_SCHEME:
         metacard.setAttribute(new AttributeImpl(Media.ENCODING, getString(node.value)));
@@ -681,8 +664,7 @@ public class DAGConverter {
         break;
       case NsiliConstants.MISM_LEVEL:
         metacard.setAttribute(
-            new AttributeImpl(
-                IsrAttributes.VIDEO_MOTION_IMAGERY_SYSTEMS_MATRIX_LEVEL, getShort(node.value)));
+            new AttributeImpl(Isr.VIDEO_MOTION_IMAGERY_SYSTEMS_MATRIX_LEVEL, getShort(node.value)));
         break;
       case NsiliConstants.SCANNING_MODE:
         metacard.setAttribute(new AttributeImpl(Media.SCANNING_MODE, getString(node.value)));
@@ -690,8 +672,7 @@ public class DAGConverter {
       case NsiliConstants.VMTI_PROCESSED:
         metacard.setAttribute(
             new AttributeImpl(
-                IsrAttributes.VIDEO_MOVING_TARGET_INDICATOR_PROCESSED,
-                node.value.extract_boolean()));
+                Isr.VIDEO_MOVING_TARGET_INDICATOR_PROCESSED, node.value.extract_boolean()));
         break;
       default:
         break;
@@ -726,37 +707,34 @@ public class DAGConverter {
       case NsiliConstants.OPERATION_NAME:
         metacard.setAttribute(
             new AttributeImpl(
-                IsrAttributes.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_OPERATION_NAME,
+                Isr.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_OPERATION_NAME,
                 getString(node.value)));
         break;
       case NsiliConstants.INCIDENT_NUM:
         metacard.setAttribute(
             new AttributeImpl(
-                IsrAttributes.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_INCIDENT_NUMBER,
+                Isr.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_INCIDENT_NUMBER,
                 getString(node.value)));
         break;
       case NsiliConstants.EVENT_TYPE:
         metacard.setAttribute(
             new AttributeImpl(
-                IsrAttributes.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_TYPE,
-                getString(node.value)));
+                Isr.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_TYPE, getString(node.value)));
         break;
       case NsiliConstants.CBRN_CATEGORY:
         metacard.setAttribute(
             new AttributeImpl(
-                IsrAttributes.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_CATEGORY,
-                getString(node.value)));
+                Isr.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_CATEGORY, getString(node.value)));
         break;
       case NsiliConstants.SUBSTANCE:
         metacard.setAttribute(
             new AttributeImpl(
-                IsrAttributes.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_SUBSTANCE,
-                getString(node.value)));
+                Isr.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_SUBSTANCE, getString(node.value)));
         break;
       case NsiliConstants.ALARM_CLASSIFICATION:
         metacard.setAttribute(
             new AttributeImpl(
-                IsrAttributes.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_ALARM_CLASSIFICATION,
+                Isr.CHEMICAL_BIOLOGICAL_RADIOLOGICAL_NUCLEAR_ALARM_CLASSIFICATION,
                 getString(node.value)));
         break;
       default:

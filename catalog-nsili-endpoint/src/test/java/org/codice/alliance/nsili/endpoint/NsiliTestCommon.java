@@ -27,9 +27,11 @@ import ddf.catalog.data.impl.MetacardImpl;
 import ddf.catalog.data.impl.ResultImpl;
 import ddf.catalog.filter.proxy.builder.GeotoolsFilterBuilder;
 import ddf.security.Subject;
+import ddf.security.SubjectOperations;
 import ddf.security.assertion.SecurityAssertion;
 import ddf.security.service.SecurityManager;
 import ddf.security.service.SecurityServiceException;
+import ddf.security.service.impl.SubjectUtils;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -75,6 +77,8 @@ public class NsiliTestCommon {
   protected CatalogFramework mockCatalogFramework = mock(CatalogFramework.class);
 
   protected static final String USERID = "NsilTest";
+
+  protected static final SubjectOperations subjectOperations = new SubjectUtils();
 
   protected void setupCommonMocks() throws SecurityServiceException {
     when(mockSubject.getPrincipals()).thenReturn(mockPrincipalCollection);
@@ -143,13 +147,15 @@ public class NsiliTestCommon {
     testCard1.setModifiedDate(new Date(2000));
     testCard1.setAttribute(new AttributeImpl(MetacardVersion.VERSIONED_ON, new Date(2000)));
     MetacardVersionImpl testMetacard1Change =
-        new MetacardVersionImpl("anId", testCard1, MetacardVersion.Action.VERSIONED, mockSubject);
+        new MetacardVersionImpl(
+            "anId", testCard1, MetacardVersion.Action.VERSIONED, mockSubject, subjectOperations);
     testMetacard1Change.setTitle("Test Metacard 1 - change");
     Result testHistChange = new ResultImpl(testMetacard1Change);
     results.add(testHistChange);
 
     MetacardVersionImpl testMetacard1Delete =
-        new MetacardVersionImpl("anId", testCard1, MetacardVersion.Action.DELETED, mockSubject);
+        new MetacardVersionImpl(
+            "anId", testCard1, MetacardVersion.Action.DELETED, mockSubject, subjectOperations);
     testMetacard1Delete.setAttribute(
         new AttributeImpl(MetacardVersion.VERSIONED_ON, new Date(2250)));
     Result testHistDelete = new ResultImpl(testMetacard1Delete);

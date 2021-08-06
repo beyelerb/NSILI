@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+/**
+ * Copyright (c) Codice Foundation
+ *
+ * This is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either
+ * version 3 of the License, or any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details. A copy of the GNU Lesser General Public License is distributed along with this program and can be found at
+ * <http://www.gnu.org/licenses/lgpl.html>.
+ *
+ **/
+-->
+<features name="nsili-itest-dependencies">
+    <feature name="nsili-itest-dependencies">
+        <feature prerequisite="true">wrap</feature>
+        <feature>third-party-dependencies</feature>
+        <feature>ddf-dependencies</feature>
+        <feature>alliance-dependencies</feature>
+    </feature>
+
+    <feature name="third-party-dependencies">
+        <bundle>mvn:commons-io/commons-io/${commons-io.version}</bundle>
+        <bundle>wrap:mvn:org.awaitility/awaitility/${awaitility.version}</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.hamcrest/${hamcrest-all.servicemix.version}</bundle>
+    </feature>
+
+    <feature name="ddf-dependencies">
+        <feature>catalog-core</feature>
+
+        <bundle>mvn:org.apache.httpcomponents/httpcore-osgi/${httpcore.version}</bundle>
+        <bundle>mvn:org.apache.httpcomponents/httpclient-osgi/${httpclient.version}</bundle>
+        <bundle>mvn:ddf.thirdparty/rest-assured/${ddf.version}</bundle>
+
+        <bundle>mvn:ddf.test.itests/test-itests-common/${ddf.version}</bundle>
+        <bundle>mvn:ddf.lib/test-common/${ddf.version}</bundle>
+
+        <bundle>mvn:ddf.thirdparty/restito/${ddf.version}</bundle>
+
+        <bundle>mvn:ddf.platform.util/platform-util/${ddf.version}</bundle>
+
+    </feature>
+
+    <feature name="alliance-dependencies">
+        <feature>security-core</feature>
+        <bundle>mvn:com.google.guava/guava/${guava.version}</bundle>
+        <bundle>mvn:org.codice.alliance.test.itests/test-itests-common/${alliance.version}</bundle>
+        <!--
+        <bundle>mvn:org.codice.alliance.distribution/sdk-app/${alliance.version}</bundle>
+        -->
+    </feature>
+
+    <feature name="nsili-dependencies">
+        <bundle>mvn:org.codice.alliance.nsili.test.itests.itests/nsili-test-itests-common/${project.version}</bundle>
+        <feature>nsili-app</feature>
+    </feature>
+</features>

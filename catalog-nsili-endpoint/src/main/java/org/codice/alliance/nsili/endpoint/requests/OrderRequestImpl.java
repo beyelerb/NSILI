@@ -59,6 +59,7 @@ import org.codice.alliance.nsili.common.UCO.RequestDescription;
 import org.codice.alliance.nsili.common.UCO.State;
 import org.codice.alliance.nsili.common.UCO.Status;
 import org.codice.alliance.nsili.common.UCO.SystemFault;
+import org.codice.alliance.nsili.endpoint.AuditLogger;
 import org.codice.alliance.nsili.endpoint.NsiliEndpoint;
 import org.codice.alliance.nsili.endpoint.managers.AccessManagerImpl;
 import org.codice.alliance.nsili.endpoint.managers.EmailConfiguration;
@@ -196,7 +197,8 @@ public class OrderRequestImpl extends OrderRequestPOA {
 
       ResourceRequestCallable resourceRequestCallable =
           new ResourceRequestCallable(resourceRequest, metacard.getSourceId());
-      resourceResponse = NsiliEndpoint.getGuestSubject().execute(resourceRequestCallable);
+      resourceResponse =
+          NsiliEndpoint.getGuestSubject(new AuditLogger()).execute(resourceRequestCallable);
 
       if (resourceResponse != null && resourceResponse.getResource() != null) {
         Resource resource = resourceResponse.getResource();

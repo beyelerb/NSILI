@@ -21,6 +21,7 @@ import ddf.catalog.filter.FilterBuilder;
 import ddf.catalog.operation.QueryResponse;
 import ddf.catalog.operation.impl.QueryImpl;
 import ddf.catalog.operation.impl.QueryRequestImpl;
+import ddf.security.audit.SecurityLogger;
 import ddf.security.service.SecurityServiceException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -59,6 +60,8 @@ public class AccessManagerImpl extends AccessManagerPOA {
 
   private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AccessManagerImpl.class);
 
+  private SecurityLogger securityLogger;
+
   private CatalogFramework catalogFramework;
 
   private FilterBuilder filterBuilder;
@@ -73,6 +76,10 @@ public class AccessManagerImpl extends AccessManagerPOA {
 
   public void setFilterBuilder(FilterBuilder filterBuilder) {
     this.filterBuilder = filterBuilder;
+  }
+
+  public void setSecurityLogger(SecurityLogger securityLogger) {
+    this.securityLogger = securityLogger;
   }
 
   public void setQuerySources(Set<String> querySources) {
@@ -202,7 +209,7 @@ public class AccessManagerImpl extends AccessManagerPOA {
 
     try {
       QueryResultsCallable queryCallable = new QueryResultsCallable(catalogQueryRequest);
-      results.addAll(NsiliEndpoint.getGuestSubject().execute(queryCallable));
+      results.addAll(NsiliEndpoint.getGuestSubject(securityLogger).execute(queryCallable));
 
     } catch (ExecutionException | SecurityServiceException e) {
       LOGGER.debug("Unable to query catalog", e);
