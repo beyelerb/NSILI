@@ -30,10 +30,8 @@
     <feature name="catalog-email" version="${project.version}"
              description="Alliance Email Sending Service">
         <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
-        <!--
-        <bundle>mvn:org.codice.alliance.catalog.core/catalog-email-api/${project.version}</bundle>
-        <bundle>mvn:org.codice.alliance.catalog.core/catalog-email-impl/${project.version}</bundle>
-        -->
+        <bundle>mvn:org.codice.alliance.catalog.core/catalog-email-api/${alliance.version}</bundle>
+        <bundle>mvn:org.codice.alliance.catalog.core/catalog-email-impl/${alliance.version}</bundle>
     </feature>
 
     <feature name="catalog-nsili-source" version="${project.version}"

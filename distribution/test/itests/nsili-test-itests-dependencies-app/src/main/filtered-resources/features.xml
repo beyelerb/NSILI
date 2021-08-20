@@ -18,12 +18,18 @@
         <feature>third-party-dependencies</feature>
         <feature>ddf-dependencies</feature>
         <feature>alliance-dependencies</feature>
+        <feature>nsili-dependencies</feature>
     </feature>
 
     <feature name="third-party-dependencies">
         <bundle>mvn:commons-io/commons-io/${commons-io.version}</bundle>
         <bundle>wrap:mvn:org.awaitility/awaitility/${awaitility.version}</bundle>
         <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.hamcrest/${hamcrest-all.servicemix.version}</bundle>
+        <bundle>wrap:mvn:org.codice.imaging.nitf/codice-imaging-nitf-core-api/${nitf-imaging.version}</bundle>
+        <bundle>wrap:mvn:org.codice.imaging.nitf/codice-imaging-nitf-core/${nitf-imaging.version}</bundle>
+        <bundle>wrap:mvn:org.codice.imaging.nitf/codice-imaging-nitf-fluent-api/${nitf-imaging.version}</bundle>
+        <bundle>wrap:mvn:org.codice.imaging.nitf/codice-imaging-nitf-fluent/${nitf-imaging.version}</bundle>
+        <bundle>wrap:mvn:org.codice.imaging.nitf/codice-imaging-nitf-render/${nitf-imaging.version}</bundle>
     </feature>
 
     <feature name="ddf-dependencies">
@@ -53,6 +59,6 @@
 
     <feature name="nsili-dependencies">
         <bundle>mvn:org.codice.alliance.nsili.test.itests.itests/nsili-test-itests-common/${project.version}</bundle>
-        <feature>nsili-app</feature>
+        <!-- <feature>nsili-app</feature> -->
     </feature>
 </features>

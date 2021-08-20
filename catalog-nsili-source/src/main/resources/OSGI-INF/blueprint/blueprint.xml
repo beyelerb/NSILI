@@ -50,11 +50,11 @@
     <reference id="nsiliCorbaOrb" interface="org.codice.alliance.nsili.orb.api.CorbaOrb"
                availability="mandatory"/>
 
-    <reference id="clientFactoryFactory" interface="org.codice.ddf.cxf.client.ClientFactoryFactory" availability="mandatory"/>
+    <reference id="clientBuilderFactory" interface="org.codice.ddf.cxf.client.ClientBuilderFactory" availability="mandatory"/>
 
     <bean id="urlReader" class="ddf.catalog.resource.impl.URLResourceReader">
         <argument ref="mimeTypeMapper"/>
-        <argument ref="clientFactoryFactory"/>
+        <argument ref="clientBuilderFactory"/>
         <property name="rootResourceDirectories">
             <set>
                 <value type="java.lang.String">${ddf.home}/data/products</value>
@@ -91,7 +91,7 @@
             <!-- Custom Metacard Type Definitions -->
             <property name="nsiliMetacardType" ref="nsiliMetacardType" />
             <argument ref="nsiliCorbaOrb" />
-            <argument ref="clientFactoryFactory"/>
+            <argument ref="clientBuilderFactory"/>
         </cm:managed-component>
     </cm:managed-service-factory>
 
@@ -123,7 +123,7 @@
             <!-- Custom Metacard Type Definitions -->
             <property name="nsiliMetacardType" ref="nsiliMetacardType" />
             <argument ref="nsiliCorbaOrb" />
-            <argument ref="clientFactoryFactory"/>
+            <argument ref="clientBuilderFactory"/>
         </cm:managed-component>
     </cm:managed-service-factory>
 </blueprint>

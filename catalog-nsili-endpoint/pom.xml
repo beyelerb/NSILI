@@ -27,10 +27,12 @@
     <!-- Need to disable checkstyle due to overriding generated method stubs from IDL -->
     <properties>
         <checkstyle.skip>true</checkstyle.skip>
+        <google-http-client.version>1.22.0</google-http-client.version>
+        <woodstox.core.version>5.3.0</woodstox.core.version>
+        <woodstox.stax2-api.version>4.2</woodstox.stax2-api.version>
     </properties>
 
     <dependencies>
-        <!--
         <dependency>
             <groupId>ddf.catalog.core</groupId>
             <artifactId>catalog-core-api</artifactId>
@@ -41,7 +43,6 @@
             <artifactId>catalog-core-api-impl</artifactId>
             <version>${ddf.version}</version>
         </dependency>
-        -->
         <dependency>
             <groupId>ddf.platform.util</groupId>
             <artifactId>platform-util</artifactId>
@@ -78,6 +79,11 @@
             <version>${cxf.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client</artifactId>
+            <version>${google-http-client.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.jayway.restassured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>2.4.0</version>
@@ -97,6 +103,16 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.woodstox</groupId>
+            <artifactId>stax2-api</artifactId>
+            <version>${woodstox.stax2-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.woodstox</groupId>
+            <artifactId>woodstox-core</artifactId>
+            <version>${woodstox.core.version}</version>
         </dependency>
         <dependency>
             <groupId>ddf.catalog.core</groupId>
@@ -173,10 +189,17 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.codice.ddf</groupId>
+            <artifactId>alerts</artifactId>
+            <version>${ddf.version}</version>
+        </dependency>
+        <!--
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+        -->
     </dependencies>
     <build>
         <resources>
@@ -197,16 +220,19 @@
                             org.codice.alliance.nsili.endpoint
                         </Export-Package>
                         <Embed-Dependency>
+                            alerts,
                             catalog-nsili-bqs,
                             catalog-nsili-common,
                             catalog-core-api-impl,
                             catalog-nsili-transformer,
+                            security-core-services,
                             versioning-common,
                             jgrapht-core,
                             antlr4-runtime,
                             geospatial,
                             httpcore,
                             httpclient,
+                            google-http-client,
                             jtar
                         </Embed-Dependency>
                         <Import-Package>

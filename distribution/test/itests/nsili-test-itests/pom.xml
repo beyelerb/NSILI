@@ -99,10 +99,53 @@
             <version>${ddf.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- end ddf dependencies -->
+
         <dependency>
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
             <version>${awaitility.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.alliance.test.itests</groupId>
+            <artifactId>test-itests-common</artifactId>
+            <version>${alliance.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.codice.alliance.distribution</groupId>
+            <artifactId>sample-mpegts-streamgenerator</artifactId>
+            <version>${alliance.version}</version>
+            <scope>test</scope>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>org.codice.alliance.distribution</groupId>
+            <artifactId>alliance</artifactId>
+            <version>${alliance.version}</version>
+            <type>zip</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.alliance.security</groupId>
+            <artifactId>banner-marking</artifactId>
+            <version>${alliance.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.alliance.test.itests</groupId>
+            <artifactId>test-itests-dependencies-app</artifactId>
+            <version>${alliance.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.alliance.distribution</groupId>
+            <artifactId>sdk-app</artifactId>
+            <version>${alliance.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
         </dependency>
         <dependency>
             <groupId>ddf.distribution</groupId>
@@ -124,16 +167,8 @@
             <version>${ddf.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- end ddf dependencies -->
 
         <!-- alliance dependencies -->
-        <dependency>
-            <groupId>org.codice.alliance.distribution</groupId>
-            <artifactId>alliance</artifactId>
-            <version>${alliance.version}</version>
-            <type>zip</type>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.codice.alliance.catalog.core</groupId>
             <artifactId>catalog-core-api</artifactId>
@@ -144,47 +179,9 @@
             <artifactId>catalog-email-api</artifactId>
             <version>${alliance.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.codice.alliance.security</groupId>
-            <artifactId>banner-marking</artifactId>
-            <version>${alliance.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.codice.alliance.test.itests</groupId>
-            <artifactId>test-itests-dependencies-app</artifactId>
-            <version>${alliance.version}</version>
-            <classifier>features</classifier>
-            <type>xml</type>
-        </dependency>
         <!-- end of alliance dependencies -->
 
-        <!-- NSILI features under test and test dependencies -->
-        <dependency>
-            <groupId>org.codice.alliance.nsili</groupId>
-            <artifactId>catalog-nsili-source</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codice.alliance.nsili</groupId>
-            <artifactId>catalog-nsili-endpoint</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codice.alliance.nsili</groupId>
-            <artifactId>catalog-nsili-orb-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codice.alliance.nsili</groupId>
-            <artifactId>catalog-nsili-orb-impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codice.alliance.nsili</groupId>
-            <artifactId>catalog-nsili-sourcestoquery-ui</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!-- NSILI dependencies -->
         <dependency>
             <groupId>org.codice.alliance.nsili.distribution.sdk</groupId>
             <artifactId>sample-nsili-server</artifactId>
