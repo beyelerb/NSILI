@@ -26,6 +26,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-container-karaf</artifactId>
+            <version>${pax.exam.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.codice.alliance.test.itests</groupId>
             <artifactId>test-itests-common</artifactId>
             <version>${alliance.version}</version>
@@ -75,7 +80,7 @@
                         </Export-Package>
                         <Embed-Dependency>
                             pax-exam-container-karaf,
-                            test-itest-common
+                            test-itests-common
                         </Embed-Dependency>
                     </instructions>
                 </configuration>

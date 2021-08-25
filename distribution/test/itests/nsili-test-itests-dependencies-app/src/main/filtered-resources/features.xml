@@ -13,6 +13,8 @@
  **/
 -->
 <features name="nsili-itest-dependencies">
+
+    <repository>mvn:ddf.features/utilities/${ddf.version}/xml/features</repository>
     <feature name="nsili-itest-dependencies">
         <feature prerequisite="true">wrap</feature>
         <feature>third-party-dependencies</feature>
@@ -59,6 +61,6 @@
 
     <feature name="nsili-dependencies">
         <bundle>mvn:org.codice.alliance.nsili.test.itests.itests/nsili-test-itests-common/${project.version}</bundle>
-        <!-- <feature>nsili-app</feature> -->
+        <feature>nsili-app</feature>
     </feature>
 </features>
