@@ -201,6 +201,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client</artifactId>
+            <version>${google-http-client.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.codice.alliance.nsili.distribution.sdk</groupId>
             <artifactId>nsili-sdk-app</artifactId>
             <version>${project.version}</version>
@@ -210,6 +216,13 @@
         <dependency>
             <groupId>org.codice.alliance.nsili.test.itests.itests</groupId>
             <artifactId>nsili-test-itests-dependencies-app</artifactId>
+            <version>${project.version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+        <dependency>
+            <groupId>org.codice.alliance.nsili.distribution</groupId>
+            <artifactId>nsili-app</artifactId>
             <version>${project.version}</version>
             <classifier>features</classifier>
             <type>xml</type>

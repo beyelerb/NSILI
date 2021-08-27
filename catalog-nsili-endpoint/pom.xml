@@ -27,9 +27,6 @@
     <!-- Need to disable checkstyle due to overriding generated method stubs from IDL -->
     <properties>
         <checkstyle.skip>true</checkstyle.skip>
-        <google-http-client.version>1.22.0</google-http-client.version>
-        <woodstox.core.version>5.3.0</woodstox.core.version>
-        <woodstox.stax2-api.version>4.2</woodstox.stax2-api.version>
     </properties>
 
     <dependencies>

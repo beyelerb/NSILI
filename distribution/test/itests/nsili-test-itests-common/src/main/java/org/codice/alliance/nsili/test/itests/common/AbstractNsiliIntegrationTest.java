@@ -91,11 +91,20 @@ public abstract class AbstractNsiliIntegrationTest extends AbstractAllianceInteg
             "nsili-itest-dependencies"),
         features(
             maven()
+                .groupId("org.codice.alliance.nsili.distribution")
+                .artifactId("nsili-app")
+                .type("xml")
+                .classifier("features")
+                .versionAsInProject(),
+            "nsili-app"),
+        features(
+            maven()
                 .groupId("org.codice.alliance.nsili.distribution.sdk")
                 .artifactId("nsili-sdk-app")
                 .type("xml")
                 .classifier("features")
-                .versionAsInProject()));
+                .versionAsInProject(),
+            "sample-nsili-server"));
   }
 
   public static InputStream getAllianceItestResourceAsStream(String filePath) {
