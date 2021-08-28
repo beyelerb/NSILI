@@ -18,6 +18,7 @@ import static org.codice.ddf.itests.common.opensearch.OpenSearchTestCommons.OPEN
 import static org.codice.ddf.itests.common.opensearch.OpenSearchTestCommons.getOpenSearchSourceProperties;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import com.jayway.restassured.response.ValidatableResponse;
@@ -118,18 +119,18 @@ public class NsiliSourceTest extends AbstractNsiliIntegrationTest {
       getSecurityPolicy().configureRestForBasic();
 
       // @formatter:off
-      given()
-          .auth()
-          .basic("admin", "admin")
-          .header("X-Requested-With", "XMLHttpRequest")
-          .header("Origin", ADMIN_ALL_SOURCES_PATH.getUrl())
-          .when()
-          .get(ADMIN_ALL_SOURCES_PATH.getUrl())
-          .then()
-          .log()
-          .all()
-          .assertThat()
-          .body(containsString("\"id\":\"httpNsiliSource\""));
+      String responseBody =
+          given()
+              .auth()
+              .basic("admin", "admin")
+              .header("X-Requested-With", "XMLHttpRequest")
+              .header("Origin", ADMIN_ALL_SOURCES_PATH.getUrl())
+              .when()
+              .get(ADMIN_ALL_SOURCES_PATH.getUrl())
+              .getBody()
+              .asString();
+      assertThat(responseBody, containsString("\"id\":\"httpNsiliSource\""));
+
       // @formatter:on
     } finally {
       getSecurityPolicy().configureRestForGuest();
@@ -147,18 +148,17 @@ public class NsiliSourceTest extends AbstractNsiliIntegrationTest {
       getSecurityPolicy().configureRestForBasic();
 
       // @formatter:off
-      given()
-          .auth()
-          .basic("admin", "admin")
-          .header("X-Requested-With", "XMLHttpRequest")
-          .header("Origin", ADMIN_ALL_SOURCES_PATH.getUrl())
-          .when()
-          .get(ADMIN_ALL_SOURCES_PATH.getUrl())
-          .then()
-          .log()
-          .all()
-          .assertThat()
-          .body(containsString("\"id\":\"ftpNsiliSource\""));
+      String responseBody =
+          given()
+              .auth()
+              .basic("admin", "admin")
+              .header("X-Requested-With", "XMLHttpRequest")
+              .header("Origin", ADMIN_ALL_SOURCES_PATH.getUrl())
+              .when()
+              .get(ADMIN_ALL_SOURCES_PATH.getUrl())
+              .getBody()
+              .asString();
+      assertThat(responseBody, containsString("\"id\":\"httpNsiliSource\""));
       // @formatter:on
     } finally {
       getSecurityPolicy().configureRestForGuest();

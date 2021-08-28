@@ -93,7 +93,6 @@ public class NsiliEndpointTest extends AbstractNsiliIntegrationTest {
       getSecurityPolicy().configureRestForGuest();
       waitForSystemReady();
       System.setProperty(CORBA_DEFAULT_PORT_PROPERTY, CORBA_DEFAULT_PORT.getPort());
-
       startHttpListener();
     } catch (Exception e) {
       LOGGER.error("Failed in @BeforeExam: ", e);
@@ -112,8 +111,7 @@ public class NsiliEndpointTest extends AbstractNsiliIntegrationTest {
 
   @Before
   public void startSampleNsiliClientFeature() throws Exception {
-    ingestedProductId =
-        ingestRecord("nsili-test-itests/src/test/resources/alliance.png", "image/png");
+    ingestedProductId = ingestRecord("alliance.png", "image/png");
     getServiceManager().startFeature(true, SAMPLE_NSILI_CLIENT_FEATURE_NAME);
   }
 

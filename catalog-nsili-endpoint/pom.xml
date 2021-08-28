@@ -27,6 +27,8 @@
     <!-- Need to disable checkstyle due to overriding generated method stubs from IDL -->
     <properties>
         <checkstyle.skip>true</checkstyle.skip>
+        <woodstox.core.version>5.3.0</woodstox.core.version>
+        <woodstox.stax2-api.version>4.2</woodstox.stax2-api.version>
     </properties>
 
     <dependencies>
@@ -94,7 +96,7 @@
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <version>4.5.1-1</version>
+            <version>${antlr4-runtime.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
